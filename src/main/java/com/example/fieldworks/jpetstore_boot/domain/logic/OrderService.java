@@ -13,7 +13,6 @@ import com.example.fieldworks.jpetstore_boot.domain.Order;
  * @since 26.12.2003
  * @see PetStoreFacade
  * @see PetStoreImpl
- * @see org.springframework.samples.jpetstore.service.JaxRpcOrderService
  */
 public interface OrderService {
 
