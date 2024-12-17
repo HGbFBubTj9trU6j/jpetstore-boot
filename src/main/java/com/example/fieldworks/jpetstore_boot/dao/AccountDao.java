@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.example.fieldworks.jpetstore_boot.domain.Account;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.repository.CrudRepository;
 
-public interface AccountDao {
+public interface AccountDao extends CrudRepository<Account, String> {
 
   Account getAccount(String username) throws DataAccessException;
 

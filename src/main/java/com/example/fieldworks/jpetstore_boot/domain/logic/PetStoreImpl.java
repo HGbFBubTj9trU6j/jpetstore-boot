@@ -2,6 +2,9 @@ package com.example.fieldworks.jpetstore_boot.domain.logic;
 
 import com.example.fieldworks.jpetstore_boot.domain.*;
 import com.example.fieldworks.jpetstore_boot.dao.*;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
@@ -47,6 +50,8 @@ import java.util.List;
  * @author Juergen Hoeller
  * @since 30.11.2003
  */
+@Service
+@Transactional
 public class PetStoreImpl implements PetStoreFacade, OrderService {
 
 	private AccountDao accountDao;
