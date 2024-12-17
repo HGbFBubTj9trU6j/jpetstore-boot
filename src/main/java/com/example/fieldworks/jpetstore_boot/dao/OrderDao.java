@@ -3,15 +3,16 @@ package com.example.fieldworks.jpetstore_boot.dao;
 import java.util.List;
 
 import com.example.fieldworks.jpetstore_boot.domain.Order;
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderDao extends CrudRepository<Order, String> {
 
-  List getOrdersByUsername(String username) throws DataAccessException;
+  List getOrdersByUsername(String username);
 
-  Order getOrder(int orderId) throws DataAccessException;
+  Order getOrder(int orderId);
 
-  void insertOrder(Order order) throws DataAccessException;
+  void insertOrder(Order order);
 
 }
