@@ -20,22 +20,22 @@ public interface PetStoreFacade {
 
 	void updateAccount(Account account);
 
-	List getUsernameList();
+	List<String> getUsernameList();
 
 
-	List getCategoryList();
+	List<Category> getCategoryList();
 
 	Category getCategory(String categoryId);
 	
 
-	List getProductListByCategory(String categoryId);
+	List<Product> getProductListByCategory(String categoryId);
 
-	List searchProductList(String keywords);
+	List<Product> searchProductList(String keywords);
 
 	Product getProduct(String productId);
 
 
-	List getItemListByProduct(String productId);
+	List<Item> getItemListByProduct(String productId);
 
 	Item getItem(String itemId);
 
@@ -46,6 +46,6 @@ public interface PetStoreFacade {
 
 	Order getOrder(int orderId);
 
-	List getOrdersByUsername(String username);
+	List<Order> getOrdersByUsername(String username);
 
 }

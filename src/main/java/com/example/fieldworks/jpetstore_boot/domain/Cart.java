@@ -12,9 +12,9 @@ public class Cart implements Serializable {
 
   /* Private Fields */
 
-  private final Map itemMap = Collections.synchronizedMap(new HashMap());
+  private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<>());
 	
-  private final PagedListHolder itemList = new PagedListHolder();
+  private final PagedListHolder<CartItem> itemList = new PagedListHolder<>();
 
   /* JavaBeans Properties */
 
@@ -22,8 +22,8 @@ public class Cart implements Serializable {
 		this.itemList.setPageSize(4);
 	}
 
-	public Iterator getAllCartItems() { return itemList.getSource().iterator(); }
-  public PagedListHolder getCartItemList() { return itemList; }
+	public Iterator<CartItem> getAllCartItems() { return itemList.getSource().iterator(); }
+  public PagedListHolder<CartItem> getCartItemList() { return itemList; }
   public int getNumberOfItems() { return itemList.getSource().size(); }
 
   /* Public Methods */
@@ -33,7 +33,7 @@ public class Cart implements Serializable {
   }
 
   public void addItem(Item item, boolean isInStock) {
-    CartItem cartItem = (CartItem) itemMap.get(item.getItemId());
+    CartItem cartItem = itemMap.get(item.getItemId());
     if (cartItem == null) {
       cartItem = new CartItem();
       cartItem.setItem(item);
@@ -47,7 +47,7 @@ public class Cart implements Serializable {
 
 
   public Item removeItemById(String itemId) {
-    CartItem cartItem = (CartItem) itemMap.remove(itemId);
+    CartItem cartItem = itemMap.remove(itemId);
     if (cartItem == null) {
       return null;
     }
@@ -58,20 +58,20 @@ public class Cart implements Serializable {
   }
 
   public void incrementQuantityByItemId(String itemId) {
-    CartItem cartItem = (CartItem) itemMap.get(itemId);
+    CartItem cartItem = itemMap.get(itemId);
     cartItem.incrementQuantity();
   }
 
   public void setQuantityByItemId(String itemId, int quantity) {
-    CartItem cartItem = (CartItem) itemMap.get(itemId);
+    CartItem cartItem = itemMap.get(itemId);
     cartItem.setQuantity(quantity);
   }
 
   public double getSubTotal() {
     double subTotal = 0;
-    Iterator items = getAllCartItems();
+    Iterator<CartItem> items = getAllCartItems();
     while (items.hasNext()) {
-      CartItem cartItem = (CartItem) items.next();
+      CartItem cartItem = items.next();
       Item item = cartItem.getItem();
       double listPrice = item.getListPrice();
       int quantity = cartItem.getQuantity();

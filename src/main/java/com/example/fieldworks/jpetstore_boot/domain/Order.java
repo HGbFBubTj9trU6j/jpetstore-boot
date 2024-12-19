@@ -1,42 +1,76 @@
 package com.example.fieldworks.jpetstore_boot.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+@Table("ORDERS")
 public class Order implements Serializable {
 
   /* Private Fields */
 
+  @Id
+  @Column("ORDERID")
   private int orderId;
+  @Column("USERID")
   private String username;
+  @Column("ORDERDATE")
   private Date orderDate;
+  @Column("SHIPADDR1")
   private String shipAddress1;
+  @Column("SHIPADDR2")
   private String shipAddress2;
+  @Column("SHIPCITY")
   private String shipCity;
+  @Column("SHIPSTATE")
   private String shipState;
+  @Column("SHIPZIP")
   private String shipZip;
+  @Column("SHIPCOUNTRY")
   private String shipCountry;
+  @Column("BILLADDR1")
   private String billAddress1;
+  @Column("BILLADDR2")
   private String billAddress2;
+  @Column("BILLCITY")
   private String billCity;
+  @Column("BILLSTATE")
   private String billState;
+  @Column("BILLZIP")
   private String billZip;
+  @Column("BILLCOUNTRY")
   private String billCountry;
+  @Column("COURIER")
   private String courier;
+  @Column("TOTALPRICE")
   private double totalPrice;
+  @Column("BILLTOFIRSTNAME")
   private String billToFirstName;
+  @Column("BILLTOLASTNAME")
   private String billToLastName;
+  @Column("SHIPTOFIRSTNAME")
   private String shipToFirstName;
+  @Column("SHIPTOLASTNAME")
   private String shipToLastName;
+  @Column("CREDITCARD")
   private String creditCard;
+  @Column("EXPRDATE")
   private String expiryDate;
+  @Column("CARDTYPE")
   private String cardType;
+  @Column("LOCALE")
   private String locale;
+  @Transient
   private String status;
-  private List lineItems = new ArrayList();
+  @Transient
+  private List<LineItem> lineItems = new ArrayList<>();
 
   /* JavaBeans Properties */
 
@@ -118,8 +152,8 @@ public class Order implements Serializable {
   public String getStatus() { return status; }
   public void setStatus(String status) { this.status = status; }
 
-  public void setLineItems(List lineItems) { this.lineItems = lineItems; }
-  public List getLineItems() { return lineItems; }
+  public void setLineItems(List<LineItem> lineItems) { this.lineItems = lineItems; }
+  public List<LineItem> getLineItems() { return lineItems; }
 
   /* Public Methods */
 
@@ -154,9 +188,9 @@ public class Order implements Serializable {
     locale = "CA";
     status = "P";
 
-    Iterator i = cart.getAllCartItems();
+    Iterator<CartItem> i = cart.getAllCartItems();
     while (i.hasNext()) {
-      CartItem cartItem = (CartItem) i.next();
+      CartItem cartItem = i.next();
       addLineItem(cartItem);
     }
   }

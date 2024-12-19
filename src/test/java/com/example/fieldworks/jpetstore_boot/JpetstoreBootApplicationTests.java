@@ -8,6 +8,6 @@ class JpetstoreBootApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// This test method is intentionally left empty to check if the Spring application context loads successfully.
 	}
-
 }
