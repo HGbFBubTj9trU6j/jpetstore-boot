@@ -110,11 +110,11 @@ public class PetStoreImpl implements PetStoreFacade, OrderService {
 		this.accountDao.updateAccount(account);
 	}
 
-	public List getUsernameList() {
+	public List<String> getUsernameList() {
 		return this.accountDao.getUsernameList();
 	}
 
-	public List getCategoryList() {
+	public List<Category> getCategoryList() {
 		return this.categoryDao.getCategoryList();
 	}
 
@@ -122,11 +122,11 @@ public class PetStoreImpl implements PetStoreFacade, OrderService {
 		return this.categoryDao.getCategory(categoryId);
 	}
 
-	public List getProductListByCategory(String categoryId) {
+	public List<Product> getProductListByCategory(String categoryId) {
 		return this.productDao.getProductListByCategory(categoryId);
 	}
 
-	public List searchProductList(String keywords) {
+	public List<Product> searchProductList(String keywords) {
 		return this.productDao.searchProductList(keywords);
 	}
 
@@ -134,7 +134,7 @@ public class PetStoreImpl implements PetStoreFacade, OrderService {
 		return this.productDao.getProduct(productId);
 	}
 
-	public List getItemListByProduct(String productId) {
+	public List<Item> getItemListByProduct(String productId) {
 		return this.itemDao.getItemListByProduct(productId);
 	}
 
@@ -155,7 +155,7 @@ public class PetStoreImpl implements PetStoreFacade, OrderService {
 		return this.orderDao.getOrder(orderId);
 	}
 
-	public List getOrdersByUsername(String username) {
+	public List<Order> getOrdersByUsername(String username) {
 		return this.orderDao.getOrdersByUsername(username);
 	}
 
