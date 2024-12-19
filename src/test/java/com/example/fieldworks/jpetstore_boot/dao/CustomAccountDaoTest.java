@@ -31,9 +31,7 @@ class CustomAccountDaoTest {
 
     @Test
     void testGetAccountByUsernameNotFound() {
-        assertThrows(EmptyResultDataAccessException.class, () -> {
-            customAccountDao.getAccount("notfound");
-        });
+        assertThrows(EmptyResultDataAccessException.class, () -> customAccountDao.getAccount("notfound"));
     }
     @Test
     void testGetAccountByUsernameAndPassword() {
@@ -43,9 +41,7 @@ class CustomAccountDaoTest {
     }
     @Test
     void testGetAccountByUsernameAndPasswordNotFound() {
-        assertThrows(EmptyResultDataAccessException.class, () -> {
-            customAccountDao.getAccount("j2ee", "notfound");
-        });
+        assertThrows(EmptyResultDataAccessException.class, () -> customAccountDao.getAccount("j2ee", "notfound"));
     }
     @Test
     void testInsertAccount() {

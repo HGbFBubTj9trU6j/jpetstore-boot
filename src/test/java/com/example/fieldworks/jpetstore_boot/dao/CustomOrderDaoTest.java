@@ -28,9 +28,6 @@ class CustomOrderDaoTest {
     private Order order;
     private Account account;
     private Cart cart;
-    private Item item1;
-    private Item item2;
-    private CartItem cartItem;
 
     @BeforeEach
     void setUp() {
@@ -47,18 +44,18 @@ class CustomOrderDaoTest {
         account.setCountry("USA");
 
         cart = new Cart();
-        item1 = new Item();
+        Item item1 = new Item();
         item1.setItemId("item1");
         item1.setListPrice(10.0);
 
-        item2 = new Item();
+        Item item2 = new Item();
         item2.setItemId("item2");
         item2.setListPrice(20.0);
 
         cart.addItem(item1, true);
         cart.addItem(item2, true);
 
-        cartItem = new CartItem();
+        CartItem cartItem = new CartItem();
         cartItem.setItem(item1);
         cartItem.setQuantity(2);
         cartItem.setInStock(true);
@@ -76,7 +73,7 @@ class CustomOrderDaoTest {
         assertNotNull(orders);
         assertFalse(orders.isEmpty());
         assertEquals(2, orders.size());
-        assertEquals(orders.get(0).getOrderId(), 1001);
+        assertEquals(1001, orders.get(0).getOrderId());
 
         // testGetOrder
         Order insertedOrder = customOrderDao.getOrder(1001);

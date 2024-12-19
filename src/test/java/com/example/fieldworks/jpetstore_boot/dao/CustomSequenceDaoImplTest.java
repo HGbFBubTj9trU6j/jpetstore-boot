@@ -28,8 +28,6 @@ class CustomSequenceDaoImplTest {
 
     @Test
     void testGetNextIdSequenceNotFound() {
-        assertThrows(DataRetrievalFailureException.class, () -> {
-            customSequenceDao.getNextId("nonExistentSequence");
-        });
+        assertThrows(DataRetrievalFailureException.class, () -> customSequenceDao.getNextId("nonExistentSequence"));
     }
 }
