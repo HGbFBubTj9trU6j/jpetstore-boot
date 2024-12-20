@@ -2,6 +2,7 @@ package com.example.fieldworks.jpetstore_boot.domain.logic;
 
 import com.example.fieldworks.jpetstore_boot.domain.*;
 import com.example.fieldworks.jpetstore_boot.dao.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,14 +55,19 @@ import java.util.List;
 @Transactional
 public class PetStoreImpl implements PetStoreFacade, OrderService {
 
+	@Autowired
 	private AccountDao accountDao;
 
+	@Autowired
 	private CategoryDao categoryDao;
 
+	@Autowired
 	private ProductDao productDao;
 
+	@Autowired
 	private ItemDao itemDao;
 
+	@Autowired
 	private OrderDao orderDao;
 
 
