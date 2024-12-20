@@ -2,6 +2,7 @@ package com.example.fieldworks.jpetstore_boot.dao;
 
 import com.example.fieldworks.jpetstore_boot.domain.Product;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -26,7 +27,11 @@ public class CustomProductDaoImpl implements CustomProductDao {
         String sql = "SELECT productid, name, descn as description, category as categoryId FROM product WHERE category = :categoryId";
         Map<String, Object> params = new HashMap<>();
         params.put("categoryId", categoryId);
-        return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Product.class));
+        List<Product> products = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Product.class));
+        if (products.isEmpty()) {
+            throw new EmptyResultDataAccessException("No products found", 1);
+        }
+        return products;
     }
 
     @Override

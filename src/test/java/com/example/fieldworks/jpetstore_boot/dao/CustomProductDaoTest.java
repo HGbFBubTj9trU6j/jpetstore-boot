@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.util.List;
 
@@ -31,6 +32,11 @@ class CustomProductDaoTest {
         assertEquals("Angelfish", products.get(0).getName());
         assertEquals("FISH", products.get(0).getCategoryId());
         assertEquals("<image src=\"../resources/images/fish1.gif\">Salt Water fish from Australia", products.get(0).getDescription());
+    }
+
+    @Test
+    void testGetProductListByCategoryNotFound() {
+        assertThrows(EmptyResultDataAccessException.class, () -> customProductDao.getProductListByCategory("NotFound"));
     }
 
     @Test
