@@ -27,6 +27,10 @@ class CustomProductDaoTest {
         assertNotNull(products);
         assertFalse(products.isEmpty());
         assertEquals(4, products.size());
+        assertEquals("FI-SW-01", products.get(0).getProductId());
+        assertEquals("Angelfish", products.get(0).getName());
+        assertEquals("FISH", products.get(0).getCategoryId());
+        assertEquals("<image src=\"../resources/images/fish1.gif\">Salt Water fish from Australia", products.get(0).getDescription());
     }
 
     @Test
@@ -34,6 +38,9 @@ class CustomProductDaoTest {
         Product product = customProductDao.getProduct("FI-SW-01");
         assertNotNull(product);
         assertEquals("FI-SW-01", product.getProductId());
+        assertEquals("Angelfish", product.getName());
+        assertEquals("FISH", product.getCategoryId());
+        assertEquals("<image src=\"../resources/images/fish1.gif\">Salt Water fish from Australia", product.getDescription());
     }
 
     @Test
@@ -42,5 +49,9 @@ class CustomProductDaoTest {
         assertNotNull(products);
         assertFalse(products.isEmpty());
         assertEquals(4, products.size());
+        assertEquals("FI-SW-01", products.get(0).getProductId());
+        assertEquals("Angelfish", products.get(0).getName());
+        assertEquals("FISH", products.get(0).getCategoryId());
+        assertEquals("<image src=\"../resources/images/fish1.gif\">Salt Water fish from Australia", products.get(0).getDescription());
     }
 }

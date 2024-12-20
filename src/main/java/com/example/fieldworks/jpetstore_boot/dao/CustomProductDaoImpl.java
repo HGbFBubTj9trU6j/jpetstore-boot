@@ -23,7 +23,7 @@ public class CustomProductDaoImpl implements CustomProductDao {
 
     @Override
     public List<Product> getProductListByCategory(String categoryId) throws DataAccessException {
-        String sql = "SELECT productid, name, descn, category FROM product WHERE category = :categoryId";
+        String sql = "SELECT productid, name, descn as description, category as categoryId FROM product WHERE category = :categoryId";
         Map<String, Object> params = new HashMap<>();
         params.put("categoryId", categoryId);
         return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Product.class));
@@ -31,7 +31,7 @@ public class CustomProductDaoImpl implements CustomProductDao {
 
     @Override
     public Product getProduct(String productId) throws DataAccessException {
-        String sql = "SELECT productid, name, descn, category FROM product WHERE productid = :productId";
+        String sql = "SELECT productid, name, descn as description, category as categoryId FROM product WHERE productid = :productId";
         Map<String, Object> params = new HashMap<>();
         params.put("productId", productId);
         return jdbcTemplate.queryForObject(sql, params, new BeanPropertyRowMapper<>(Product.class));
@@ -39,7 +39,7 @@ public class CustomProductDaoImpl implements CustomProductDao {
 
     @Override
     public List<Product> searchProductList(String keywords) throws DataAccessException {
-        String sql = "SELECT productid, name, descn, category FROM product WHERE lower(name) LIKE :keyword OR lower(category) LIKE :keyword OR lower(descn) LIKE :keyword";
+        String sql = "SELECT productid, name, descn as description, category as categoryId FROM product WHERE lower(name) LIKE :keyword OR lower(category) LIKE :keyword OR lower(descn) LIKE :keyword";
         List<String> keywordList = new ArrayList<>();
         StringTokenizer splitter = new StringTokenizer(keywords, " ", false);
         while (splitter.hasMoreTokens()) {
