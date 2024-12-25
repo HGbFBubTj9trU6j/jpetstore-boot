@@ -2,6 +2,7 @@ package com.example.fieldworks.jpetstore_boot.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -12,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Table("ORDERS")
-public class Order implements Serializable {
+public class Order implements Serializable, Persistable<Integer> {
 
   /* Private Fields */
 
@@ -71,6 +72,8 @@ public class Order implements Serializable {
   private String status;
   @Transient
   private List<LineItem> lineItems = new ArrayList<>();
+  @Transient
+  private boolean needsInsert = false;
 
   /* JavaBeans Properties */
 
@@ -155,6 +158,8 @@ public class Order implements Serializable {
   public void setLineItems(List<LineItem> lineItems) { this.lineItems = lineItems; }
   public List<LineItem> getLineItems() { return lineItems; }
 
+  public void setNeedsInsert() { this.needsInsert = true; }
+
   /* Public Methods */
 
   public void initOrder(Account account, Cart cart) {
@@ -205,4 +210,13 @@ public class Order implements Serializable {
   }
 
 
+  @Override
+  public Integer getId() {
+    return getOrderId();
+  }
+
+  @Override
+  public boolean isNew() {
+    return needsInsert;
+  }
 }

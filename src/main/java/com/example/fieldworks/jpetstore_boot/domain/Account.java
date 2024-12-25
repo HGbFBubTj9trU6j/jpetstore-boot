@@ -1,30 +1,58 @@
 package com.example.fieldworks.jpetstore_boot.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.io.Serializable;
 
 
-public class Account implements Serializable {
+@Table("ACCOUNT")
+public class Account implements Serializable, Persistable<String> {
 
   /* Private Fields */
 
+  @Id
+  @Column("USERID")
   private String username;
+  @Transient
   private String password;
+  @Column("EMAIL")
   private String email;
+  @Column("FIRSTNAME")
   private String firstName;
+  @Column("LASTNAME")
   private String lastName;
+  @Column("STATUS")
   private String status;
+  @Column("ADDR1")
   private String address1;
+  @Column("ADDR2")
   private String address2;
+  @Column("CITY")
   private String city;
+  @Column("STATE")
   private String state;
+  @Column("ZIP")
   private String zip;
+  @Column("COUNTRY")
   private String country;
+  @Column("PHONE")
   private String phone;
+  @Transient
   private String favouriteCategoryId;
+  @Transient
   private String languagePreference;
+  @Transient
   private boolean listOption;
+  @Transient
   private boolean bannerOption;
+  @Transient
   private String bannerName;
+  @Transient
+  private boolean needsInsert = false;
 
   /* JavaBeans Properties */
 
@@ -84,4 +112,15 @@ public class Account implements Serializable {
   public String getBannerName() { return bannerName; }
   public void setBannerName(String bannerName) { this.bannerName = bannerName; }
 
+  public void setNeedsInsert() { this.needsInsert = true; }
+
+  @Override
+  public String getId() {
+    return getUsername();
+  }
+
+  @Override
+  public boolean isNew() {
+    return needsInsert;
+  }
 }

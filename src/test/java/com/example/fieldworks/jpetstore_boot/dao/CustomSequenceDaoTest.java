@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @JdbcTest
 @Import(CustomSequenceDaoImpl.class)
-class CustomSequenceDaoImplTest {
+class CustomSequenceDaoTest {
 
     @Autowired
     private CustomSequenceDao customSequenceDao;

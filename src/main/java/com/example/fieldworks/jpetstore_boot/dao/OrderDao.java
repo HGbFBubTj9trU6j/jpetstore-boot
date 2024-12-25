@@ -5,6 +5,6 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderDao extends ListCrudRepository<Order, String>, CustomOrderDao {
+public interface OrderDao extends ListCrudRepository<Order, Integer>, CustomOrderDao {
 
 }

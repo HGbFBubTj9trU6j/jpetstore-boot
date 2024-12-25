@@ -1,25 +1,48 @@
 package com.example.fieldworks.jpetstore_boot.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
 import java.io.Serializable;
 
 
-public class Item implements Serializable {
+@Table("ITEM")
+public class Item implements Serializable, Persistable<String> {
 
   /* Private Fields */
 
+  @Id
+  @Column("ITEMID")
   private String itemId;
+  @Column("PRODUCTID")
   private String productId;
+  @Column("LISTPRICE")
   private double listPrice;
+  @Column("UNITCOST")
   private double unitCost;
+  @Column("SUPPLIER")
   private int supplierId;
+  @Column("STATUS")
   private String status;
+  @Column("ATTR1")
   private String attribute1;
+  @Column("ATTR2")
   private String attribute2;
+  @Column("ATTR3")
   private String attribute3;
+  @Column("ATTR4")
   private String attribute4;
+  @Column("ATTR5")
   private String attribute5;
+  @Transient
   private Product product;
+  @Transient
   private int quantity;
+  @Transient
+  private boolean needsInsert = false;
 
   /* JavaBeans Properties */
 
@@ -68,4 +91,17 @@ public class Item implements Serializable {
     return "(" + getItemId().trim() + "-" + getProductId().trim() + ")";
   }
 
+  public void setNeedsInsert() {
+    this.needsInsert = true;
+  }
+
+  @Override
+  public String getId() {
+    return getItemId();
+  }
+
+  @Override
+  public boolean isNew() {
+    return needsInsert;
+  }
 }
