@@ -29,7 +29,35 @@ public class CustomOrderDaoImpl implements CustomOrderDao {
 
     @Override
     public List<Order> getOrdersByUsername(String username) throws DataAccessException {
-        String sql = "SELECT * FROM orders WHERE userid = :username";
+        String sql = """
+                        SELECT\s
+                            ORDERID AS orderId,
+                            USERID AS username,
+                            ORDERDATE AS orderDate,
+                            SHIPADDR1 AS shipAddress1,
+                            SHIPADDR2 AS shipAddress2,
+                            SHIPCITY AS shipCity,
+                            SHIPSTATE AS shipState,
+                            SHIPZIP AS shipZip,
+                            SHIPCOUNTRY AS shipCountry,
+                            BILLADDR1 AS billAddress1,
+                            BILLADDR2 AS billAddress2,
+                            BILLCITY AS billCity,
+                            BILLSTATE AS billState,
+                            BILLZIP AS billZip,
+                            BILLCOUNTRY AS billCountry,
+                            COURIER AS courier,
+                            TOTALPRICE AS totalPrice,
+                            BILLTOFIRSTNAME AS billToFirstName,
+                            BILLTOLASTNAME AS billToLastName,
+                            SHIPTOFIRSTNAME AS shipToFirstName,
+                            SHIPTOLASTNAME AS shipToLastName,
+                            CREDITCARD AS creditCard,
+                            EXPRDATE AS expiryDate,
+                            CARDTYPE AS cardType,
+                            LOCALE AS locale
+                FROM orders WHERE userid = :username
+        """;
         Map<String, Object> params = new HashMap<>();
         params.put("username", username);
         return jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<>(Order.class));
@@ -37,7 +65,35 @@ public class CustomOrderDaoImpl implements CustomOrderDao {
 
     @Override
     public Order getOrder(int orderId) throws DataAccessException {
-        String sql = "SELECT * FROM orders WHERE orderid = :orderId";
+        String sql = """
+                SELECT\s
+                    ORDERID AS orderId,
+                    USERID AS username,
+                    ORDERDATE AS orderDate,
+                    SHIPADDR1 AS shipAddress1,
+                    SHIPADDR2 AS shipAddress2,
+                    SHIPCITY AS shipCity,
+                    SHIPSTATE AS shipState,
+                    SHIPZIP AS shipZip,
+                    SHIPCOUNTRY AS shipCountry,
+                    BILLADDR1 AS billAddress1,
+                    BILLADDR2 AS billAddress2,
+                    BILLCITY AS billCity,
+                    BILLSTATE AS billState,
+                    BILLZIP AS billZip,
+                    BILLCOUNTRY AS billCountry,
+                    COURIER AS courier,
+                    TOTALPRICE AS totalPrice,
+                    BILLTOFIRSTNAME AS billToFirstName,
+                    BILLTOLASTNAME AS billToLastName,
+                    SHIPTOFIRSTNAME AS shipToFirstName,
+                    SHIPTOLASTNAME AS shipToLastName,
+                    CREDITCARD AS creditCard,
+                    EXPRDATE AS expiryDate,
+                    CARDTYPE AS cardType,
+                    LOCALE AS locale
+                FROM orders WHERE orderid = :orderId
+                """;
         Map<String, Object> params = new HashMap<>();
         params.put("orderId", orderId);
         Order order = jdbcTemplate.queryForObject(sql, params, new BeanPropertyRowMapper<>(Order.class));

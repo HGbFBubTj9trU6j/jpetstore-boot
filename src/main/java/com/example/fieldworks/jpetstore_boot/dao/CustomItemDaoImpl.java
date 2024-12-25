@@ -5,6 +5,7 @@ import com.example.fieldworks.jpetstore_boot.domain.Order;
 import com.example.fieldworks.jpetstore_boot.domain.LineItem;
 import com.example.fieldworks.jpetstore_boot.domain.Product;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -37,7 +38,7 @@ public class CustomItemDaoImpl implements CustomItemDao {
     @Override
     public List<Item> getItemListByProduct(String productId) throws DataAccessException {
         String sql = "SELECT itemid, listprice, unitcost, supplier, i.productid, name, descn, category, status, attr1, attr2, attr3, attr4, attr5 FROM item i, product p WHERE p.productid = i.productid AND i.productid = ?";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+        List<Item> items = jdbcTemplate.query(sql, (rs, rowNum) -> {
             Item item = new Item();
             item.setItemId(rs.getString("itemid"));
             item.setListPrice(rs.getDouble("listprice"));
@@ -58,6 +59,11 @@ public class CustomItemDaoImpl implements CustomItemDao {
             item.setAttribute5(rs.getString("attr5"));
             return item;
         }, productId);
+        if (items.isEmpty()) {
+            throw new EmptyResultDataAccessException("No items found", 1);
+        }
+        return items;
+
     }
 
     @Override
