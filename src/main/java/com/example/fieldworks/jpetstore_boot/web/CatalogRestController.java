@@ -4,10 +4,7 @@ import com.example.fieldworks.jpetstore_boot.domain.Category;
 import com.example.fieldworks.jpetstore_boot.domain.Item;
 import com.example.fieldworks.jpetstore_boot.domain.Product;
 import com.example.fieldworks.jpetstore_boot.domain.logic.PetStoreFacade;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
